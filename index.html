@@ -1,0 +1,414 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Houssam Assaad</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Houssam Assaad: Mechanical Engineering undergraduate working on autonomy for mobile robots, modern control, state estimation and learning-based decision making.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one calm column (max ~880px), sticky tab bar, cards for entries; detail pages swap in place via #hash.
+   Institution tones: KFUPM = green, AUB = maroon, used only as a thin rule + small tag. */
+:root{
+  --bg:#f7f8fa; --surface:#ffffff; --fg:#151a22; --muted:#5b6474; --line:#dfe3ea;
+  --accent:#2347b3; --accent-soft:#e8edfb; --ok:#1f7a4d; --ok-soft:#e3f3ea; --warn:#8a5a00; --warn-soft:#fbf0d9;
+  --kfupm:#0b7a4b; --kfupm-soft:#e4f3ec; --aub:#8a1538; --aub-soft:#f7e6eb;
+  --display:"Familjen Grotesk","Helvetica Neue",Arial,sans-serif;
+  --body:"IBM Plex Sans","Segoe UI",Roboto,Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f131a; --surface:#161b24; --fg:#e7eaf0; --muted:#9aa3b2; --line:#29303c;
+  --accent:#8ea8ff; --accent-soft:#1d2640; --ok:#6fcf9b; --ok-soft:#16291f; --warn:#f2c26b; --warn-soft:#2c2414;
+  --kfupm:#5fd19d; --kfupm-soft:#14291f; --aub:#f08aa6; --aub-soft:#2e1820; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f131a; --surface:#161b24; --fg:#e7eaf0; --muted:#9aa3b2; --line:#29303c;
+  --accent:#8ea8ff; --accent-soft:#1d2640; --ok:#6fcf9b; --ok-soft:#16291f; --warn:#f2c26b; --warn-soft:#2c2414;
+  --kfupm:#5fd19d; --kfupm-soft:#14291f; --aub:#f08aa6; --aub-soft:#2e1820; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:16px/1.6 var(--body);margin:0;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:880px;margin:0 auto}
+a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+h1,h2,h3{font-family:var(--display);line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:clamp(2rem,5vw,2.75rem);font-weight:700;letter-spacing:-.01em}
+h2{font-size:1.5rem;font-weight:600}
+h3{font-size:1.15rem;font-weight:600}
+p{margin:0}
+.mono{font-family:var(--mono);font-size:.82rem;letter-spacing:.02em}
+.muted{color:var(--muted)}
+
+/* header */
+header.top{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;padding-block:40px 24px}
+header.top .who{display:flex;flex-direction:column;gap:10px;min-width:0}
+header.top .role{font-size:1.05rem;color:var(--muted);max-width:60ch}
+header.top .role b{color:var(--fg);font-weight:500}
+header.top img{width:112px;height:112px;object-fit:cover;border-radius:50%;border:1px solid var(--line)}
+.links{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;font-size:.95rem}
+.email{display:inline-flex;gap:8px;align-items:center}
+.email code{font-family:var(--mono);font-size:.88rem;user-select:all}
+.copy{font:500 .78rem var(--mono);color:var(--muted);background:none;border:1px solid var(--line);border-radius:6px;padding:2px 8px;cursor:pointer}
+.copy:hover{color:var(--fg);border-color:var(--muted)}
+
+/* tabs */
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);
+  display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs a{flex:none;padding:12px 14px;color:var(--muted);text-decoration:none;font-weight:500;border-bottom:2px solid transparent;margin-bottom:-1px}
+nav.tabs a:hover{color:var(--fg)}
+nav.tabs a[aria-current="page"]{color:var(--fg);border-bottom-color:var(--accent)}
+
+main{padding-block:32px 64px;display:flex;flex-direction:column;gap:40px}
+section{display:flex;flex-direction:column;gap:16px}
+.lede{display:flex;flex-direction:column;gap:12px;font-size:1.06rem;max-width:66ch}
+.eyebrow{font:500 .75rem var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+
+/* chips & status */
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:400 .78rem var(--mono);padding:3px 8px;border-radius:999px;background:var(--accent-soft);color:var(--accent)}
+.status{font:500 .72rem var(--mono);text-transform:uppercase;letter-spacing:.06em;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.status.done{background:var(--ok-soft);color:var(--ok)}
+.status.live{background:var(--warn-soft);color:var(--warn)}
+
+/* institution tone */
+.tone-kfupm{--tone:var(--kfupm);--tone-soft:var(--kfupm-soft)}
+.tone-aub{--tone:var(--aub);--tone-soft:var(--aub-soft)}
+.org{font:500 .72rem var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:4px;background:var(--tone-soft);color:var(--tone);white-space:nowrap}
+
+/* major work (overview) */
+.major{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px}
+.mw{display:flex;flex-direction:column;gap:10px;background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--tone);border-radius:10px;padding:16px;text-decoration:none;color:inherit;transition:border-color .15s}
+.mw:hover{border-color:var(--tone)}
+.mw .top{display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap}
+.mw .who{font-size:.9rem;color:var(--muted)}
+.mw .key{display:flex;flex-direction:column;gap:4px;border-top:1px solid var(--line);padding-top:10px;font-size:.92rem}
+.mw .key b{font-family:var(--display);font-variant-numeric:tabular-nums;color:var(--tone);font-weight:600}
+.mw .more{font:500 .8rem var(--mono);color:var(--tone)}
+
+/* entry list */
+.list{display:flex;flex-direction:column;gap:12px}
+.entry{display:grid;grid-template-columns:132px 1fr;gap:16px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px;
+  text-decoration:none;color:inherit;transition:border-color .15s}
+.entry:hover{border-color:var(--accent)}
+.entry[class*="tone-"]{border-left:3px solid var(--tone)}
+.entry .thumb{width:132px;height:100px;border-radius:6px;object-fit:cover;background:var(--accent-soft)}
+.entry .thumb.ph{display:flex;align-items:center;justify-content:center;font:500 .8rem var(--mono);color:var(--accent);text-align:center;padding:8px}
+.entry .body{display:flex;flex-direction:column;gap:6px;min-width:0}
+.entry .head{display:flex;gap:8px 12px;flex-wrap:wrap;align-items:baseline;justify-content:space-between}
+.entry .meta{font:400 .8rem var(--mono);color:var(--muted)}
+.entry p{color:var(--muted);font-size:.95rem}
+.entry .tags{display:flex;gap:6px;flex-wrap:wrap}
+
+/* big project boxes */
+.boxes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.box{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;text-decoration:none;color:inherit;transition:border-color .15s,transform .15s,box-shadow .15s}
+.box:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.08)}
+.box:first-child{grid-column:1/-1;justify-self:center;width:min(100%,440px)}
+.box .pic{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;background:#fff;border-bottom:1px solid var(--line)}
+.box:first-child .pic{aspect-ratio:1/1;object-fit:contain;background:#fff}
+.box:first-child .in{align-items:center;text-align:center}
+.box:first-child .head{justify-content:center}
+.box .pic.contain{object-fit:contain}
+.box .in{padding:16px 18px 18px;display:flex;flex-direction:column;gap:8px;flex:1}
+.box h3{font-size:1.3rem}
+.box:first-child h3{font-size:1.55rem}
+.box .head{display:flex;justify-content:space-between;align-items:baseline;gap:8px 12px;flex-wrap:wrap}
+.box p{color:var(--muted);font-size:.96rem}
+.box .go{margin-top:auto;padding-top:6px;font:500 .82rem var(--mono);color:var(--accent)}
+/* small horizontal items (peripheral projects, not clickable) */
+.smalls{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px}
+.small{display:grid;grid-template-columns:64px 1fr;gap:12px;align-items:center;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+.small img,.small .ph{width:64px;height:64px;border-radius:6px;object-fit:cover;background:var(--accent-soft)}
+.small .ph{display:flex;align-items:center;justify-content:center;font:500 .62rem var(--mono);color:var(--accent);text-align:center;padding:4px}
+.small b{font-family:var(--display);font-weight:600;font-size:.95rem;display:block;line-height:1.25}
+.small span{font-size:.8rem;color:var(--muted);display:block;line-height:1.4}
+@media (max-width:640px){.boxes{grid-template-columns:1fr}}
+/* compact cards (peripheral projects) */
+.mini{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.mini .card{background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden;display:flex;flex-direction:column}
+.mini .card img,.mini .card .ph{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;background:var(--accent-soft)}
+.mini .card .ph{display:flex;align-items:center;justify-content:center;font:500 .8rem var(--mono);color:var(--accent)}
+.mini .card .in{padding:12px 14px;display:flex;flex-direction:column;gap:4px}
+.mini .card p{font-size:.9rem;color:var(--muted)}
+
+.pubs{display:flex;flex-direction:column;gap:10px;padding:0;margin:0;list-style:none}
+.pubs li{border-left:2px solid var(--line);padding-left:12px}
+
+/* courses */
+.course{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:10px}
+.course .code{font:500 .78rem var(--mono);color:var(--accent);letter-spacing:.04em}
+.course ul{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:4px}
+.lines{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.lines div{display:grid;grid-template-columns:200px 1fr;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.lines .code{font:500 .8rem var(--mono)}
+.lines .code span{display:block;color:var(--muted);font-weight:400}
+.lines p{font-size:.95rem;color:var(--muted)}
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+
+/* detail */
+.back{font:500 .85rem var(--mono);text-decoration:none}
+.detail{display:flex;flex-direction:column;gap:24px}
+.detail .hero-meta{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center}
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+figure{margin:0;display:flex;flex-direction:column;gap:6px}
+figure img,figure video{width:100%;border-radius:8px;border:1px solid var(--line);background:var(--surface);display:block}
+.gallery figure img{aspect-ratio:4/3;object-fit:cover}
+.gallery figure:only-child{max-width:520px}
+.gallery figure.fit img{object-fit:contain}
+.gallery figure video{max-height:420px;object-fit:contain;background:#000}
+figcaption{font-size:.82rem;color:var(--muted)}
+.detail ul,.detail ol{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:6px;max-width:70ch}
+.detail .prose{display:flex;flex-direction:column;gap:12px;max-width:70ch}
+.results{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:10px}
+.results figure img{max-width:100%}
+.wide{display:flex;flex-direction:column;gap:12px}
+.wide figure img{background:#fff}
+.learned{border-left:3px solid var(--accent);background:var(--accent-soft);border-radius:0 10px 10px 0;padding:16px;display:flex;flex-direction:column;gap:10px}
+.learned ul{gap:8px}
+.learned li b{font-weight:600}
+.flow{display:flex;flex-direction:column;gap:6px}
+.flow .lbl{font:500 .75rem var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.detail .flow ol{list-style:none;padding:0;margin:0;display:flex;flex-direction:row;flex-wrap:wrap;gap:6px;align-items:center;max-width:none}
+.flow li{font-size:.86rem;padding:6px 10px;border:1px solid var(--line);border-radius:6px;background:var(--surface)}
+.flow li+li::before{content:"→";color:var(--muted);margin-right:8px;margin-left:-2px}
+.flow.mine li{border-color:var(--accent);color:var(--fg)}
+footer{border-top:1px solid var(--line);padding-block:20px 32px;color:var(--muted);font-size:.85rem}
+
+@media (max-width:560px){
+  header.top{grid-template-columns:1fr;padding-block:28px 16px}
+  header.top img{width:88px;height:88px;order:-1}
+  .entry{grid-template-columns:1fr}
+  .entry .thumb{width:100%;height:160px}
+  .lines div{grid-template-columns:1fr;gap:4px}
+  .major{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head><body>
+
+<div class="wrap">
+  <header class="top">
+    <div class="who">
+      <h1>Houssam Assaad</h1>
+      <p class="role"><b>Mechanical Engineering undergraduate</b> working on autonomy for mobile robots: modern control from analysis to design, state estimation, and learning-based decision making.</p>
+      <div class="links">
+        <span class="email"><code id="mail">hma151@mail.aub.edu</code><button class="copy" id="copyBtn" type="button">Copy</button></span>
+        <a href="https://github.com/h0usam" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/Houssam-Assaad" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="cv.pdf" target="_blank" rel="noopener">CV (PDF)</a>
+      </div>
+    </div>
+    <img src="img/photo.jpg" alt="Portrait of Houssam Assaad">
+  </header>
+
+  <nav class="tabs" id="tabs" aria-label="Sections">
+    <a href="#overview">Overview</a>
+    <a href="#research">Research</a>
+    <a href="#projects">Projects</a>
+    <a href="#coursework">Coursework</a>
+    <a href="#leadership">Leadership &amp; skills</a>
+  </nav>
+
+  <main id="view" aria-live="polite"></main>
+
+  <footer>B.E. Mechanical Engineering, American University of Beirut, expected May 2027 · USAID Higher Education Scholar</footer>
+</div>
+
+<script>
+/* Block types inside an entry: {h, p} paragraph · {h, ul} list · {h, ol} numbered list · {h, flows:[{label, steps, mine}]} pipeline
+   · {h, box:true, ul?, figs?} results card · {h, learned:true, ul} highlight. Bullets may use **bold** lead-ins. */
+const P = {
+  vislam:{tab:"research",org:"kfupm",orgLabel:"KFUPM · Saudi Arabia",title:"Onboard visual–inertial SLAM for a GNSS-denied drone",
+    where:"KFUPM · Dept. of Control & Instrumentation Engineering · supervisor Dr. Ramy Rashad",when:"June – September 2026",status:"done",statusText:"Completed · paper under review",
+    summary:"Integrated a full sensing and estimation stack on a UAV and measured its accuracy against motion capture.",
+    media:[{img:"img/uav_d435i.jpg"},{img:"img/jetson_pixhawk.jpg"}],
+    chips:["ROS 2 Humble","RTAB-Map","PX4","Jetson Orin Nano","RealSense D435i","OptiTrack","Allan variance"],
+    blocks:[
+      {h:"Why",p:"Drones inside buildings, under bridges or around industrial structures cannot rely on satellite navigation. Visual–inertial SLAM is the standard answer, but its accuracy on small onboard computers is rarely measured against an independent reference."},
+      {h:"What I did",ul:["Integrated an NVIDIA Jetson Orin Nano, a Pixhawk 6X Pro (PX4) and an Intel RealSense D435i (synchronized stereo infrared + IMU) in ROS 2 Humble.","Calibrated the IMU intrinsically, cutting gravity-magnitude error from 0.069 to 0.002 m/s², and characterized its noise with a 3-hour Allan-variance study.","Recorded runs as ROS 2 bags, replayed them into stereo-inertial RTAB-Map, and scored the estimates against OptiTrack ground truth."]},
+      {h:"Results",box:true,ul:["Absolute trajectory error of 0.100 m RMSE (median 0.084 m) over three trajectories.","Estimated path length within 6.8% of ground truth; orientation tracked through a full yaw revolution.","A reproducible protocol for benchmarking onboard estimators against motion capture."],
+        figs:[{img:"img/kfupm_ape.jpg",cap:"Estimated 3D trajectory coloured by absolute position error (0.037–0.187 m) against the OptiTrack reference (dashed), after SE(3) Umeyama alignment."}]}],
+    pub:"H. Assaad, R. Rashad, “Benchmarking onboard visual–inertial SLAM against motion-capture ground truth,” Journal of Undergraduate Research International (KFUPM), under review, 2026."},
+
+  rl:{tab:"research",org:"aub",orgLabel:"AUB · Lebanon",title:"Severity-aware pothole avoidance with reinforcement learning",
+    where:"AUB Vision & Robotics Lab · supervisor Dr. Naseem Daher",when:"February – August 2026",status:"done",statusText:"Completed",
+    summary:"A learned driving policy for an autonomous ground vehicle that reduces damage from potholes of different severity, scored against the exact optimum.",
+    media:[{img:"img/rl_sim.jpg"}],
+    chips:["Reinforcement learning","DQN","Dynamic programming","Gazebo","Python","PyTorch","Gymnasium"],
+    blocks:[
+      {h:"Why",p:"A pothole is not an obstacle: a vehicle can always drive over it, but a severe one costs far more than a shallow one. The goal was a decision layer that minimizes damage graded by severity, and a fair way to measure how well any policy does it."},
+      {h:"What the agent learned",learned:true,ul:[
+        "**Navigation.** It drives the road to the goal, steering around hazards instead of following a fixed line.",
+        "**Position and velocity awareness.** Its decisions depend on where it is relative to each pothole and how fast it is moving.",
+        "**Aligning over potholes.** When a pothole cannot be avoided, it positions itself so that it crosses with the least damage.",
+        "**Speed control.** It slows down before severe potholes and keeps speed over mild ones, trading time for less damage."]},
+      {h:"What I did",ul:["Formulated the problem as a Markov decision process, with discrete and continuous environments sharing one damage model.","Built a Gazebo simulation that reproduces the environment the agent (an autonomous ground vehicle) interacts with closely, so that policies are trained and tested under realistic conditions.","Trained a tabular Q-learning baseline, a steering-only DQN and a DQN with joint steering and speed control.","Computed the exact optimal policy by backward dynamic programming over the finite acyclic state graph and defined a map-invariant Normalized Damage Score (NDS): the share of the achievable damage reduction a policy captures."]},
+      {h:"Results",box:true,ul:["Steering DQN: NDS 88.8% ± 1.9% on trained hazard densities and 51.4% on unseen ones (10 seeds), against 13.9% for the tabular baseline.","Severity changes the optimal steering action in only 0.5–2% of states, which motivated speed as a second control channel.","The speed-extended agent slows in proportion to severity (NDS 83.6% ± 2.1%)."],
+        figs:[{img:"img/rl_traj.jpg",cap:"Learned (greedy) trajectories on three maps at moderate hazard density. Line colour is the speed chosen at each step (0.15–0.30 m/step); the grey band is the wheel track (±0.4 m); ✕ marks a hazard contact."}]}]},
+
+  fyp:{tab:"projects",title:"Final Year Project",
+    where:"Quadruped robot for BIM-based building inspection · advisor Dr. Hussein Hussein · team of four",when:"September 2026 – May 2027",status:"live",statusText:"In progress",
+    summary:"A Unitree Go2 that walks through a building, checks each element against the building's digital model (BIM), and reports what is missing or misplaced.",
+    thumb:"img/go2.jpg",boxImg:"img/go2_square.jpg",
+    media:[{video:"img/fyp_go2.mp4",poster:"img/fyp_go2_poster.jpg",cap:"Our Unitree Go2 on campus stairs."},{img:"img/go2.jpg",fit:true,cap:"Unitree Go2, the robot platform."}],
+    chips:["Unitree Go2","ROS 2","LIO-BIM","Semantic voxel map","Nav2","BIM / IFC","Vision-language models"],
+    blocks:[
+      {h:"Why",p:"Buildings are inspected by people walking the site with a checklist, which is slow, inconsistent, and dangerous in damaged buildings. Most modern buildings have a 3D digital model (BIM) that a robot can check reality against, treating the model as a useful but uncertain reference."},
+      {h:"System overview",figs:[{img:"img/fyp_pipeline.png",cap:"The inspection pipeline (my lead) and the robotic-arm design pipeline (teammates) share a map and camera viewpoints and merge into one robot that produces an on-site inspection report."}]},
+      {h:"My role and tasks",ul:["I lead the inspection pipeline with one teammate; the other pair designs the camera arm and its next-best-view planner.","**BIM-referenced localization:** deploy and tune LIO-BIM on the Go2 (IFC model preparation, AprilTags, sensor calibration), validating on recorded data before running live.","**Semantic 3D map and costmap:** a probabilistic voxel map initialized from the BIM, where LiDAR hits confirm modeled structure and temporary obstacles fade over time.","**Navigation and mission logic:** Nav2 with a cost-aware planner, a local controller and recovery behaviours for the Go2, and a mission manager that orders targets and replans when a view is blocked.","**Verification:** a vision-language model receives each image with the element's BIM data and judges whether it is present and installed.","**Integration:** input on the arm's requirements, mounting, payload and stability, and the interfaces and coordinate frames between the two halves."]},
+      {h:"What I am studying",ul:["Inspection pipelines for quadruped robots, starting from an end-to-end BIM-based quadruped inspection system (Tuomisto et al., Automation in Construction, 2026).","LIO-BIM: real-time LiDAR-inertial localization against BIM models, robust to differences between model and reality (Stührenberg & Smarsly, Advanced Engineering Informatics, 2025).","Probabilistic (log-odds) voxel mapping, cost-aware navigation in Nav2, and the use of vision-language models for verification."]},
+      {h:"Where I want to take it",p:"Run the full mission on site in an AUB building and measure mission success rate, usable-image rate, verification accuracy and localization error, then merge the arm so the robot can inspect elements above and behind obstacles. Beyond the project, I want to keep working on autonomy for robots in construction and other real, unstructured sites."},
+      {h:"Progress",box:true,ul:["Literature review and system architecture complete.","Interfaces between the inspection pipeline and the arm defined, so both halves can be developed in parallel.","Implementation of the inspection pipeline under way."]}]},
+
+  sbr:{tab:"projects",title:"Self-balancing robot: from SISO to MIMO control",
+    where:"MECH 436 Control Systems (SISO) · MECH 653 System Analysis and Design, graduate (MIMO) · Dr. Naseem Daher",when:"SISO Nov – Dec 2025 · MIMO Sep 2026 – ongoing",status:"live",statusText:"MIMO stage in progress",
+    summary:"A two-wheeled robot first balanced with a single input and PID, now being extended to two independent motor inputs that control pitch, speed and heading.",
+    media:[{img:"img/sbr.jpg"}],chips:["State-space control","MIMO","Lagrangian modeling","Observers","LQR","MATLAB/Simulink","ESP32","OptiTrack"],
+    blocks:[
+      {h:"Why",p:"A balancing robot is an unstable system that exercises the whole chain of modeling, analysis and control. Moving from one shared motor command to two independent ones turns it into a multivariable problem: the robot can now steer, follow a speed and reject disturbances while staying upright."},
+      {h:"Stage 1 · SISO (MECH 436, Nov – Dec 2025)",ul:["Designed and built the robot, modeled it as an inverted pendulum, and tuned a PID controller on pitch against sensor noise and actuator saturation.","Stabilized the hardware under applied load. With one command to both motors, heading cannot be controlled."]},
+      {h:"Stage 2 · MIMO (MECH 653, Sep 2026 – ongoing, team of three)",ul:[
+        "**Two inputs, three outputs.** Independent left and right motor voltages control pitch θ, forward velocity v and heading ψ.",
+        "**Model.** A six-state Lagrangian model, X = [x, v, θ, θ̇, ψ, ψ̇], with DC-motor dynamics, linearized about upright on level ground.",
+        "**Decoupling.** A sum/difference transform of the voltages splits the model into a pitch–translation block (driven by the sum) and a yaw block (driven by the difference).",
+        "**Structural analysis.** The velocity channel has a right-half-plane zero, which causes inverse response and limits how fast speed can be tracked. With a single common input, travel and heading are uncontrollable, and the IMU alone cannot observe them, so wheel encoders are added.",
+        "**Specifications.** Recover from a 5° tilt to within 0.5° in 1 s; follow a 0.10 m/s speed step within 5 s with ≤ 5% overshoot; turn 30° within 1 s to ±1°; respect the shared voltage limit |V_sum| + |V_diff| ≤ 2V_max.",
+        "**Applications.** A one-wheel platform climb (roll and unequal contact) and path following from encoder–IMU odometry, with cross-track RMS ≤ 0.05 m checked against OptiTrack.",
+        "**Next.** Pole placement vs. LQR with an observer and integral action, robustness checks with saturation, noise and delay, then hardware tests on the ESP32 at 200–500 Hz."]},
+      {h:"Progress",box:true,ul:["SISO stage complete: robot balanced on hardware.","MIMO stage: equations of motion, linear six-state model, structural analysis and control objectives complete; controller design, simulation and hardware testing next."]}]},
+
+  nxp:{tab:"projects",title:"NXP Cup autonomous racing vehicle",where:"Team competition",when:"February – May 2025",status:"done",statusText:"Completed",
+    summary:"A small autonomous race car with a modular ROS 2 software stack.",
+    media:[{img:"img/nxp.jpg"}],chips:["ROS 2","Gazebo","C++"],
+    blocks:[
+      {h:"Why",p:"The NXP Cup is an inter-university autonomous racing competition: the car has to follow a track as fast as possible with onboard sensing only."},
+      {h:"What I did",ul:["Assembled the competition kit: sensors, actuators, control board and power module.","Built a modular ROS 2 node graph with separate perception, localization, planning and actuation nodes.","Optimized a minimum-time racing line under vehicle-dynamics constraints and validated it in Gazebo and on track."]},
+      {h:"Results",box:true,ul:["Complete perception-to-actuation stack running on the car.","Took part in Beirut Digital District training sessions with teams from other universities."]}]},
+
+  heatsink:{tab:"projects",title:"Heat sink fin optimization",where:"MECH 510 Design of Thermal Systems · group project",when:"Fall 2026",status:"live",statusText:"In progress",
+    summary:"Choosing the fin layout that removes the most heat within a pressure-drop limit, with a physics-based model and a data-driven one, in MATLAB.",
+    media:[{img:"img/hs_rig.jpg",fit:true,cap:"Wind-tunnel test section, finned surface, heat source and sensors."},{img:"img/hs_geom.jpg",fit:true,cap:"Un-finned plate and the staggered oblong-fin array; Sx, Sy and L are the design variables. (Figures: MECH 510 project brief.)"}],
+    chips:["Optimization","MATLAB","Constrained search","Neural-network surrogate","Heat transfer","Experiments"],
+    blocks:[
+      {h:"The problem",p:"Maximize the effectiveness of a staggered oblong-fin array on a 100 × 200 mm aluminium plate (heat removed with fins ÷ without, at a constant 60 °C base temperature) while keeping the pressure drop below 10 Pa at 2.6 m/s and fins at least 8 mm apart. The design variables are the fin spacings Sx and Sy and the fin length L."},
+      {h:"Approach",ol:["Experiments: wind-tunnel tests on twelve fin configurations, measuring heat flux, base temperature and pressure drop.","Physics-based model: fin count N(Sx, Sy, L), the objective and the constraints written in terms of the design variables, with stated assumptions.","Search: solve the constrained problem with the optimization methods from the course, in MATLAB.","Data-driven model: train a neural network on the experimental data, optimize through it, and compare its optimum with the physics-based one."]},
+      {h:"What I am learning",p:"How to turn a design question into an optimization problem: choose the variables, write the objective and constraints, justify the simplifications, pick a search method, and judge when a physics model or a data-driven surrogate is the better tool. The thermal system is the example, but the same skills carry over to any system that needs optimizing, from controller tuning and trajectory planning to robot design."},
+      {h:"Progress",box:true,ul:["Project under way this semester; results will be added when the study is complete."]}]},
+
+  microfluidic:{tab:"projects",title:"Microfluidic mixing: modeling, simulation and experiment",where:"MECH 314 Intro to Fluids Engineering · Dr. Issam Lakkis · team of six",when:"January – May 2025",status:"done",statusText:"Completed",
+    summary:"Predicting how far two streams travel before they mix in a Y-shaped micro-channel, analytically, in ANSYS and on a fabricated chip.",
+    media:[{img:"img/microfluidic.jpg",fit:true,cap:"Our chip: two dyed inlets meeting at a Y-junction, followed by a serpentine mixing channel."}],
+    chips:["Advection–diffusion","ANSYS Fluent","Non-dimensional analysis","CNC","Arduino"],
+    blocks:[
+      {h:"Why",p:"Flow in micro-channels is laminar, so streams mix only by diffusion, which is slow. Predicting the mixing distance is what lets a lab-on-a-chip device be designed around it."},
+      {h:"Modeling",ul:["Modeled the problem with the advection–diffusion (mass-transfer) equation, and mapped it onto the heat equation in a moving fluid so that ANSYS Fluent's energy solver could compute it.","Defined the mixing distance as the point where the outlet reaches 95% of its final change, then studied how inlet velocity and channel width move it.","Checked the analogy: the mixing distance stayed the same when the inlet temperatures changed (43.18 vs. 43.14 mm), as the theory predicts."]},
+      {h:"Experiment",ul:["Fabricated a Plexiglass chip with a serpentine channel by CNC machining and built a syringe pump driven by an Arduino-controlled linear actuator.","Ran dyed-water tests; results showed how sensitive mixing is to small flow imbalances and leakage, which the models do not capture."]},
+      {h:"What I took from it",learned:true,ul:["How to take a physical problem, write its governing equations, simplify them with non-dimensional analysis, and solve them numerically in ANSYS.","The same modeling mindset I now use in thermal-system optimization and in modeling robots for control: a clear mathematical model first, then simulation, then the real system."]}]}
+};
+const ORDER={research:["vislam","rl"],projects:["fyp","sbr","nxp","heatsink","microfluidic"]};
+const MINI=[
+  {img:"img/boat.jpg",title:"Boat build",meta:"Manufacturing project",short:"built and pool-tested a small motor-driven boat",p:"Fabricated and assembled a small motor-driven boat, then tested it in the pool."},
+  {ph:"LabVIEW · Arduino",title:"Closed-loop irrigation system",meta:"May 2025",short:"sensor-driven closed-loop control in LabVIEW",p:"Led the design of irrigation driven by soil-moisture and solar-radiation sensing, with live monitoring and manual override in LabVIEW."},
+  {ph:"SolidWorks FEA",title:"Go-kart design and build",meta:"Jun – Aug 2025",short:"drive-shaft FEA, machining and full-scale build",p:"Designed the drive shaft against stress and fatigue in SolidWorks FEA; machined, assembled and tested a full-scale go-kart."}];
+const COURSES=[
+  {code:"MECH 653 · graduate",title:"System Analysis and Design",when:"Fall 2026",link:"sbr",
+    learn:["State-space modeling of multivariable systems and linearization about an operating point.","Controllability and observability (rank and PBH tests), poles and zeros of MIMO systems, and how right-half-plane zeros limit performance.","State feedback by pole placement and LQR, observers and integral action."]},
+  {code:"MECH 510",title:"Design of Thermal Systems: optimization",when:"Fall 2026",link:"heatsink",
+    learn:["Formulating design problems as optimization: design variables, objective and constraints.","Search methods for constrained optimization, implemented in MATLAB.","Data-driven surrogates (neural networks) trained on experiments, compared with physics-based models."]},
+  {code:"MECH 525",title:"Product Design and Development",when:"Fall 2026",
+    learn:["Identifying customer needs through interviews and surveys, and benchmarking competitors and patents.","Concept generation and selection with weighted decision matrices, prototyping, and pitching a product to the market.","Course project: we screened 15 opportunities and are converging on a low-cost 3D-scanning workflow for prosthetic socket design, motivated by the WHO estimate that only 1 in 10 people who need prosthetic or orthotic devices have access to them."]}];
+const CLINES=[
+  ["MECH 436","Control Systems","Classical feedback control: transfer-function modeling, time- and frequency-domain analysis, root-locus and frequency-response design, and PID control, applied to balancing the self-balancing robot."],
+  ["MECH 420","Mechanical Design I","Designing machine elements against static and fatigue failure: stress analysis, failure theories, shafts and fasteners."],
+  ["MECH 421","Manufacturing Processes I","How parts are made (machining, casting, forming and joining) and how process choice shapes design, tolerances and cost."],
+  ["MECH 332","Mechanics of Machines","Kinematics and dynamics of mechanisms: linkages, cams and gears, velocity and acceleration analysis, and force analysis."]];
+
+const TABS=["overview","research","projects","coursework","leadership"];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const rich=s=>esc(s).replace(/\*\*(.+?)\*\*/g,"<b>$1</b>");
+const chips=a=>`<div class="chips">${a.map(c=>`<span class="chip">${esc(c)}</span>`).join("")}</div>`;
+const status=p=>`<span class="status ${p.status}">${esc(p.statusText)}</span>`;
+const tone=p=>p.org?` tone-${p.org}`:"";
+const orgTag=p=>p.org?`<span class="org">${esc(p.orgLabel)}</span>`:"";
+const fig=m=>`<figure${m.fit?' class="fit"':""}>${m.video?`<video controls muted playsinline preload="metadata" poster="${m.poster||""}"><source src="${m.video}" type="video/mp4"></video>`:`<img src="${m.img}" alt="${esc(m.cap||"")}" loading="lazy">`}${m.cap?`<figcaption>${esc(m.cap)}</figcaption>`:""}</figure>`;
+function box(id){const p=P[id];const src=p.boxImg||p.thumb||(p.media&&p.media.find(m=>m.img)||{}).img;const fit=p.media&&p.media.find(m=>m.img===src&&m.fit);
+  return `<a class="box" href="#${id}">${src?`<img class="pic${fit||id==="fyp"?" contain":""}" src="${src}" alt="" loading="lazy">`:""}<div class="in"><div class="head"><h3>${esc(p.title)}</h3>${status(p)}</div>
+  <span class="mono muted">${esc(p.when)}</span><p>${esc(p.summary)}</p><span class="go">View project →</span></div></a>`}
+function entry(id){const p=P[id];const src=p.thumb||(p.media&&p.media.find(m=>m.img)||{}).img;
+  const t=src?`<img class="thumb" src="${src}" alt="" loading="lazy">`:`<div class="thumb ph">${esc(p.chips[0])}</div>`;
+  return `<a class="entry${tone(p)}" href="#${id}">${t}<div class="body"><div class="head"><h3>${esc(p.title)}</h3>${status(p)}</div>
+  <span class="meta">${esc(p.when)} · ${esc(p.where)}</span><p>${esc(p.summary)}</p>${p.org?`<div class="tags">${orgTag(p)}</div>`:""}</div></a>`}
+const V={
+  overview:()=>`<section><div class="lede">
+      <p>I am a final-year Mechanical Engineering student at the American University of Beirut, with a minor in Economics.</p>
+      <p>My interests span control, robotics and AI: perception and localization of aerial robots without GPS, reinforcement-learning decision making for autonomous vehicles in unstructured environments, and modern control projects that carry a system from analysis to design.</p>
+</div>
+    ${chips(["Reinforcement learning","SLAM","ROS 2","State estimation","Modern control"])}</section>
+    <section><span class="eyebrow">Major work</span><div class="major">
+      <a class="mw tone-kfupm" href="#vislam"><div class="top"><span class="org">KFUPM · Saudi Arabia</span><span class="mono muted">Jun – Sep 2026</span></div>
+        <h3>Visual–inertial SLAM for a drone without GPS</h3>
+        <span class="who">Research intern, Dept. of Control &amp; Instrumentation Engineering, with Dr. Ramy Rashad</span>
+        <p>Built the onboard sensing and estimation stack of a UAV (Jetson, PX4, RealSense, ROS 2) and benchmarked its SLAM against motion capture.</p>
+        <div class="key"><span><b>0.100 m</b> trajectory error (RMSE) against OptiTrack</span><span><b>0.069 → 0.002 m/s²</b> IMU gravity error after calibration</span><span>First-author paper under review</span></div>
+        <span class="more">Read more →</span></a>
+      <a class="mw tone-aub" href="#rl"><div class="top"><span class="org">AUB · Lebanon</span><span class="mono muted">Feb – Aug 2026</span></div>
+        <h3>Reinforcement learning for pothole-aware driving</h3>
+        <span class="who">Undergraduate research assistant, Vision &amp; Robotics Lab, with Dr. Naseem Daher</span>
+        <p>Trained a ground vehicle to navigate, align over potholes and slow down before severe ones, and scored it against the exact optimum.</p>
+        <div class="key"><span><b>88.8%</b> of the achievable damage reduction (NDS) on trained maps</span><span><b>6×</b> the tabular Q-learning baseline (13.9%)</span></div>
+        <span class="more">Read more →</span></a></div></section>
+    <section><span class="eyebrow">Publications</span><ul class="pubs"><li>${esc(P.vislam.pub)}</li></ul></section>
+    <section><span class="eyebrow">Currently</span><div class="list">${["fyp","sbr"].map(entry).join("")}</div></section>`,
+  research:()=>`<section><h2>Research</h2><p class="muted">Two completed research projects: state estimation for aerial robots at KFUPM, and learning-based decision making for ground vehicles at AUB.</p></section><div class="list">${ORDER.research.map(entry).join("")}</div>`,
+  projects:()=>`<section><h2>Projects</h2><p class="muted">Engineering projects, most of them from courses, ordered by how much they shaped my direction.</p></section>
+    <div class="boxes">${ORDER.projects.map(box).join("")}</div>
+    <section><span class="eyebrow">Also: mechanical design &amp; build</span><div class="smalls">${MINI.map(m=>`<div class="small">${m.img?`<img src="${m.img}" alt="">`:`<div class="ph">${esc(m.ph)}</div>`}<div><b>${esc(m.title)}</b><span>${esc(m.meta)} · ${esc(m.short)}</span></div></div>`).join("")}</div></section>`,
+  coursework:()=>`<section><h2>Coursework</h2><p class="muted">What I learned in the courses that matter most for robotics and control.</p></section>
+    <div class="list">${COURSES.map(c=>`<div class="course"><span class="code">${esc(c.code)} · ${esc(c.when)}</span><h3>${esc(c.title)}</h3><ul>${c.learn.map(l=>`<li>${esc(l)}</li>`).join("")}</ul>${c.link?`<a class="back" href="#${c.link}">Applied in: ${esc(P[c.link].title)} →</a>`:""}</div>`).join("")}</div>
+    <section><span class="eyebrow">Core mechanical engineering</span><div class="lines">${CLINES.map(l=>`<div><span class="code">${esc(l[0])}<span>${esc(l[1])}</span></span><p>${esc(l[2])}</p></div>`).join("")}</div></section>`,
+  leadership:()=>`<section><h2>Leadership &amp; skills</h2></section>
+    <div class="entry" style="cursor:default"><img class="thumb" src="img/workshop.jpg" alt="Houssam leading an Arduino workshop"><div class="body"><div class="head"><h3>AUB Robotics Club, leadership role</h3><span class="meta">2023 – present</span></div>
+      <p>Organized competitive events such as Build It 8.0. Led an Arduino workshop series for 30+ students over three sessions (sensor interfacing, motor control, embedded C). Mentor junior members on hardware builds, circuits and debugging.</p></div></div>
+    <div class="list"><div class="results"><h3>USAID Higher Education Scholar</h3><p class="muted">64+ hours of community service each semester.</p></div>
+    <div class="results"><h3>Middle East Airlines (MASCO), aircraft maintenance intern</h3><p class="muted">Nov – Dec 2025. Training on avionics, airframe and powerplant systems at Beirut Airport.</p></div>
+    <div class="results"><h3>Model United Nations · Varsity Jiu-Jitsu and Taekwondo</h3><p class="muted">Debate and negotiation; represented AUB in two martial arts.</p></div></div>
+    <section><span class="eyebrow">Languages</span><div class="lines">
+      <div><span class="code">Arabic</span><p>Native</p></div>
+      <div><span class="code">English</span><p>Fluent · IELTS Academic 8.0</p></div>
+      <div><span class="code">French</span><p>Elementary</p></div></div></section>
+    <section><span class="eyebrow">Technical skills</span><div class="skills">
+      <div class="course"><h3>Robotics &amp; autonomy</h3><p class="muted">ROS 2 (Humble/Jazzy), Nav2, Gazebo, RTAB-Map / VI-SLAM, LiDAR-inertial SLAM, PX4/Pixhawk, NVIDIA Jetson, OptiTrack</p></div>
+      <div class="course"><h3>Control, estimation &amp; learning</h3><p class="muted">State-space modeling, PID and state feedback, LQR, observers, IMU calibration and Allan variance, Q-learning, DQN, dynamic programming, optimization</p></div>
+      <div class="course"><h3>Programming</h3><p class="muted">Python (PyTorch, Gymnasium), C/C++, MATLAB/Simulink, embedded C (ESP32, Arduino), LabVIEW, Linux, Git</p></div>
+      <div class="course"><h3>Design &amp; manufacturing</h3><p class="muted">SolidWorks (FEA), ANSYS Fluent, CNC machining, 3D printing</p></div></div></section>
+    <section><span class="eyebrow">Professional skills</span>${chips(["Leading and coordinating teams","Teaching and mentoring","Technical writing","Debate and negotiation","Cross-disciplinary teamwork"])}</section>`
+};
+function block(b){
+  if(b.box) return `<div class="results"><h3>${esc(b.h)}</h3>${b.ul?`<ul>${b.ul.map(x=>`<li>${rich(x)}</li>`).join("")}</ul>`:""}${(b.figs||[]).map(fig).join("")}</div>`;
+  if(b.learned) return `<div class="learned"><h3>${esc(b.h)}</h3><ul>${b.ul.map(x=>`<li>${rich(x)}</li>`).join("")}</ul></div>`;
+  if(b.flows) return `<div class="prose"><h3>${esc(b.h)}</h3>${b.flows.map(f=>`<div class="flow${f.mine?" mine":""}"><span class="lbl">${esc(f.label)}</span><ol>${f.steps.map(s=>`<li>${esc(s)}</li>`).join("")}</ol></div>`).join("")}</div>`;
+  if(b.figs) return `<div class="wide"><h3>${esc(b.h)}</h3>${b.figs.map(fig).join("")}</div>`;
+  const body=b.p?`<p>${rich(b.p)}</p>`:b.ol?`<ol>${b.ol.map(x=>`<li>${rich(x)}</li>`).join("")}</ol>`:`<ul>${b.ul.map(x=>`<li>${rich(x)}</li>`).join("")}</ul>`;
+  return `<div class="prose"><h3>${esc(b.h)}</h3>${body}</div>`}
+function detail(id){const p=P[id];
+  return `<a class="back" href="#${p.tab}">← Back to ${p.tab}</a><article class="detail">
+    <div class="hero-meta">${orgTag(p)}<span class="meta mono">${esc(p.when)}</span>${status(p)}</div>
+    <h2>${esc(p.title)}</h2><p class="muted">${esc(p.where)}</p>
+    ${p.media&&p.media.length?`<div class="gallery">${p.media.map(fig).join("")}</div>`:""}
+    ${p.blocks.map(block).join("")}
+    ${p.pub?`<p class="muted" style="font-size:.9rem">${esc(p.pub)}</p>`:""}
+    ${chips(p.chips)}</article>`}
+function render(){let h=(location.hash||"#overview").slice(1);
+  let tab=TABS.includes(h)?h:(P[h]?P[h].tab:"overview");
+  document.getElementById("view").innerHTML=P[h]?detail(h):V[tab]();
+  document.querySelectorAll("#tabs a").forEach(a=>a.getAttribute("href")==="#"+tab?a.setAttribute("aria-current","page"):a.removeAttribute("aria-current"));
+  if(P[h]||TABS.includes(h)) window.scrollTo({top:Math.min(window.scrollY,document.querySelector("header.top").offsetHeight)});
+}
+window.addEventListener("hashchange",render);render();
+document.getElementById("copyBtn").addEventListener("click",e=>{const b=e.currentTarget,t=document.getElementById("mail").textContent;
+  const done=()=>{b.textContent="Copied";setTimeout(()=>b.textContent="Copy",1500)};
+  try{navigator.clipboard.writeText(t).then(done,()=>{getSelection().selectAllChildren(document.getElementById("mail"))})}catch(_){getSelection().selectAllChildren(document.getElementById("mail"))}});
+</script>
+</body></html>
