@@ -165,6 +165,8 @@ figcaption{font-size:.82rem;color:var(--muted)}
 .results figure img{max-width:100%}
 .wide{display:flex;flex-direction:column;gap:12px}
 .wide figure img{background:#fff}
+.wide .gallery{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (max-width:640px){.wide .gallery{grid-template-columns:1fr}}
 .learned{border-left:3px solid var(--accent);background:var(--accent-soft);border-radius:0 10px 10px 0;padding:16px;display:flex;flex-direction:column;gap:10px}
 .learned ul{gap:8px}
 .learned li b{font-weight:600}
@@ -287,15 +289,25 @@ const P = {
       {h:"What I did",ul:["Assembled the competition kit: sensors, actuators, control board and power module.","Built a modular ROS 2 node graph with separate perception, localization, planning and actuation nodes.","Optimized a minimum-time racing line under vehicle-dynamics constraints and validated it in Gazebo and on track."]},
       {h:"Results",box:true,ul:["Complete perception-to-actuation stack running on the car.","Took part in Beirut Digital District training sessions with teams from other universities."]}]},
 
-  heatsink:{tab:"projects",title:"Heat sink fin optimization",where:"MECH 510 Design of Thermal Systems · group project",when:"Fall 2026",status:"live",statusText:"In progress",
-    summary:"Choosing the fin layout that removes the most heat within a pressure-drop limit, with a physics-based model and a data-driven one, in MATLAB.",
+  heatsink:{tab:"projects",title:"Heat sink fin optimization",where:"MECH 510 Design of Thermal Systems · team of three",when:"Fall 2026",status:"done",statusText:"Completed",
+    summary:"Finding the fin layout that removes the most heat within a pressure-drop limit, with a calibrated physics model and a neural-network model, optimized in MATLAB.",
     media:[{img:"img/hs_rig.jpg",fit:true,cap:"Wind-tunnel test section, finned surface, heat source and sensors."},{img:"img/hs_geom.jpg",fit:true,cap:"Un-finned plate and the staggered oblong-fin array; Sx, Sy and L are the design variables. (Figures: MECH 510 project brief.)"}],
-    chips:["Optimization","MATLAB","Constrained search","Neural-network surrogate","Heat transfer","Experiments"],
+    chips:["Optimization","MATLAB","Penalty method","Hooke–Jeeves","Model calibration","Neural networks","Heat transfer","Experiments"],
     blocks:[
       {h:"The problem",p:"Maximize the effectiveness of a staggered oblong-fin array on a 100 × 200 mm aluminium plate (heat removed with fins ÷ without, at a constant 60 °C base temperature) while keeping the pressure drop below 10 Pa at 2.6 m/s and fins at least 8 mm apart. The design variables are the fin spacings Sx and Sy and the fin length L."},
-      {h:"Approach",ol:["Experiments: wind-tunnel tests on twelve fin configurations, measuring heat flux, base temperature and pressure drop.","Physics-based model: fin count N(Sx, Sy, L), the objective and the constraints written in terms of the design variables, with stated assumptions.","Search: solve the constrained problem with the optimization methods from the course, in MATLAB.","Data-driven model: train a neural network on the experimental data, optimize through it, and compare its optimum with the physics-based one."]},
-      {h:"What I am learning",p:"How to turn a design question into an optimization problem: choose the variables, write the objective and constraints, justify the simplifications, pick a search method, and judge when a physics model or a data-driven surrogate is the better tool. The thermal system is the example, but the same skills carry over to any system that needs optimizing, from controller tuning and trajectory planning to robot design."},
-      {h:"Progress",box:true,ul:["Project under way this semester; results will be added when the study is complete."]}]},
+      {h:"Approach",ol:["**Experiments:** wind-tunnel tests on twelve fin configurations, measuring heat flux and pressure drop.","**Physics model:** fin count N(Sx, Sy, L) plus tube-bank convection and fin-efficiency correlations, calibrated against the twelve tests.","**Optimization:** an exterior-penalty method with cyclic-coordinate and Hooke–Jeeves search (golden-section line searches) in MATLAB, verified from several starting points and by a grid search.","**Data-driven model:** small neural networks for effectiveness and pressure drop trained on the same tests, optimized the same way, and compared with the physics-based optimum."]},
+      {h:"Results",box:true,ul:[
+        "**Best tested plate:** configuration 7 (Sx = Sy = 10 mm, L = 22 mm) removed **13.45×** more heat than the bare plate at only 4.18 Pa; all twelve plates stayed below 4.9 Pa.",
+        "**Calibration:** the textbook correlations over-predicted effectiveness by 2.2–3.6× and pressure drop by 7–29×, so on paper no design met the 10 Pa limit. After calibration (a least-squares factor on heat transfer and a conservative factor on pressure drop) the model follows the tests with R² ≈ 0.52.",
+        "**Physics-based optimum:** Sx = Sy = **8 mm**, L = **26.5 mm** (33 fins), ε = **13.89** at ΔP = 9.44 Pa, with the pressure limit active. All ten runs (five starting points × two search methods) converged to the same design, confirmed by the grid search.",
+        "**Neural-network optimum:** Sx = Sy = 10 mm, L = 40 mm (21 fins), ε = 12.25 at ΔP = 4.02 Pa. The effectiveness network fit the data with R = 0.92; the pressure-drop network with R = 0.61.",
+        "**Conclusion:** both methods pack the fins as tightly as allowed but disagree on fin length; the physics-based design is closer to the best tested plate. With only twelve tests neither model is very accurate, so the next step would be to build a plate with 8 mm gaps and fins of about 20–27 mm."]},
+      {h:"Result figures",gallery:[
+        {img:"img/hs_opt_contour.jpg",fit:true,cap:"Calibrated effectiveness over Sx and L at Sy = 8 mm, with the 10 Pa limit (red) and the optimum (star)."},
+        {img:"img/hs_opt_layout.jpg",fit:true,cap:"Fin layout of the physics-based optimum (8, 8, 26.5 mm): 33 fins in 11 rows."},
+        {img:"img/hs_calibration.jpg",fit:true,cap:"Model against measurement for the twelve plates, before (raw) and after calibration."},
+        {img:"img/hs_ann_regression.jpg",fit:true,cap:"Effectiveness neural network: predicted against measured values."}]},
+      {h:"What I learned",p:"How to turn a design question into an optimization problem: choose the variables, write the objective and constraints, calibrate the model against experiments, pick a search method and check the answer, and judge when a physics model or a data-driven model is the better tool. The thermal system is the example, but the same skills carry over to any system that needs optimizing, from controller tuning and trajectory planning to robot design."}]},
 
   microfluidic:{tab:"projects",title:"Microfluidic mixing: modeling, simulation and experiment",where:"MECH 314 Intro to Fluids Engineering · Dr. Issam Lakkis · team of six",when:"January – May 2025",status:"done",statusText:"Completed",
     summary:"Predicting how far two streams travel before they mix in a Y-shaped micro-channel, analytically, in ANSYS and on a fabricated chip.",
@@ -390,6 +402,7 @@ function block(b){
   if(b.learned) return `<div class="learned"><h3>${esc(b.h)}</h3><ul>${b.ul.map(x=>`<li>${rich(x)}</li>`).join("")}</ul></div>`;
   if(b.flows) return `<div class="prose"><h3>${esc(b.h)}</h3>${b.flows.map(f=>`<div class="flow${f.mine?" mine":""}"><span class="lbl">${esc(f.label)}</span><ol>${f.steps.map(s=>`<li>${esc(s)}</li>`).join("")}</ol></div>`).join("")}</div>`;
   if(b.figs) return `<div class="wide"><h3>${esc(b.h)}</h3>${b.figs.map(fig).join("")}</div>`;
+  if(b.gallery) return `<div class="wide"><h3>${esc(b.h)}</h3><div class="gallery">${b.gallery.map(fig).join("")}</div></div>`;
   const body=b.p?`<p>${rich(b.p)}</p>`:b.ol?`<ol>${b.ol.map(x=>`<li>${rich(x)}</li>`).join("")}</ol>`:`<ul>${b.ul.map(x=>`<li>${rich(x)}</li>`).join("")}</ul>`;
   return `<div class="prose"><h3>${esc(b.h)}</h3>${body}</div>`}
 function detail(id){const p=P[id];
